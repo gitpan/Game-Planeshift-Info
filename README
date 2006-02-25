@@ -1,0 +1,44 @@
+Planeshift-Info
+
+Planeshift is a free MMORPG available at : http://www.planeshift.it.
+This module allow you to easily get and parse data from the info page of a Planeshift server (so this module depend on LWP::Simple).
+the default web page used to retrieve informations is on the Laanx server : http://laanx.fragnetics.com/index.php?page=char_stats.
+
+With this module you can do mainly two things : retrieve and parse informations, and convert those data into XML. Of course you can access those data too ;-)
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the perldoc command.
+
+    perldoc Planeshift::Info
+
+You can also look for information at:
+
+    Search CPAN
+        http://search.cpan.org/dist/Planeshift-Info
+
+    CPAN Request Tracker:
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Planeshift-Info
+
+    AnnoCPAN, annotated CPAN documentation:
+        http://annocpan.org/dist/Planeshift-Info
+
+    CPAN Ratings:
+        http://cpanratings.perl.org/d/Planeshift-Info
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2006 Arnaud DUPUIS
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
