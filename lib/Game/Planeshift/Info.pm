@@ -11,11 +11,11 @@ Game::Planeshift::Info - A module to retrieve players' data on the main Planeshi
 
 =head1 VERSION
 
-Version 0.1
+Version 0.2
 
 =cut
 
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 =head1 SYNOPSIS
 
@@ -177,9 +177,12 @@ sub _parse_content
 	my ($self,$content) = @_;
 	my $data = {};
 	my @raw_data=split(/\n/,$content);
-	foreach (@{$self->{players}})
+	if(defined($self->{players}))
 	{
-		$data->{online_players}->{$_} = 0;
+		foreach (@{$self->{players}})
+		{
+			$data->{online_players}->{$_} = 0;
+		}
 	}
 	for (my $k=0;$k<=$#raw_data;$k++)
 	{
@@ -255,7 +258,7 @@ sub _parse_content
 				{
 					$start_found++;
 				}
-				if($raw_data[$k]=~/\s*<table border=0 cellspacing="0" cellpadding="1">/i)
+				if($raw_data[$k]=~/\s*<BR><BR>/i) #/\s*<table border=0 cellspacing="0" cellpadding="1">/i
 				{
 					last ;
 				}
@@ -263,17 +266,18 @@ sub _parse_content
 				$k++;
 			}
 # 			print "(active) \$k is now at $k/$#raw_data\n";
-# 			print "===> DEBUG (active) <===\n\n$html\n\n===> END DEBUG <===\n\n";
-			foreach (split(/<\/TR>/,$html))
+# 			print "===> DEBUG (online) <===\n\n$html\n\n===> END DEBUG <===\n\n";
+			foreach my $name (split(/,/,$html))
 			{
-				s/^\s*//g;
-				/<TR>(.+)$/;
-				if($1)
+				$name =~ s/\s*//g;
+				$name =~ s/<p>//ig;
+				if(defined($self->{players}) && exists($data->{online_players}->{$name}))
 				{
-					my $l = $1 ;
-					my ($name) = $l =~/<TD>([^<]+)<\/TD>/g ;
-					$data->{online_players}->{$name} = 1 if($name);
-# 					print "online status for $name is $data->{online_players}->{$name}\n";
+					$data->{online_players}->{$name} = 1 ;
+				}
+				elsif(!defined($self->{players}))
+				{
+					$data->{online_players}->{$name} = 1 ;
 				}
 			}
 			$self->{online_players} = $data->{online_players};
