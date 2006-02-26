@@ -1,10 +1,15 @@
+.cvsignore
 Build.PL
 Changes
-MANIFEST
-META.yml # Will be created by "make dist"
-README
 lib/Game/Planeshift/Info.pm
+MANIFEST
+META.yml			# Will be created by "make dist"
+planeshift_info.pl
+README
 t/00-load.t
+t/01-constructor.t
+t/02-info-retrieving.t
+t/03-xml.t
 t/boilerplate.t
 t/pod-coverage.t
 t/pod.t
