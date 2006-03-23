@@ -8,3 +8,5 @@ Revision history for Planeshift-Info
 	I forget in the 0.2 the test suite, and forget about some updates in doc and other files.
 0.3    16/03/2006
         Fix a lot of "uninitialzed value" errors.
+0.4    21/03/2006
+        When server is down the "Total_Online" is now 0 and no longer a blank value.

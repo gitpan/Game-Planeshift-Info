@@ -5,7 +5,7 @@ use Game::Planeshift::Info ;
 use Data::Dumper;
 
 my $ps = Game::Planeshift::Info->new(
-	players => ['Baston', 'Ehasara', 'Narita', 'Setill', 'Soshise', 'Mardun', 'Caules', 'Javeroal','Bodacher','Proglin','Eus','Sangwa','Anfa']
+	players => ['Baston', 'Ehasara', 'Narita', 'Setill', 'Soshise', 'Mardun', 'Caules', 'Javeroal','Bodacher','Proglin','Eus','Sangwa','Anfa','Essiri','Isra','Vaice','Flameron']
 ) ;
 
 # my $ps = Game::Planeshift::Info->new() ;

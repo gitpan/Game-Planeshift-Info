@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Game-Planeshift-Info
-version: 0.3
+version: 0.4
 author:
   - Arnaud DUPUIS <dupuisarn@cpan.org>
 abstract: A module to retrieve players' data on the main Planeshift server.
