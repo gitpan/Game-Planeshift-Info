@@ -6,6 +6,8 @@ MANIFEST
 META.yml			# Will be created by "make dist"
 planeshift_info.pl
 README
+ps_info
+ps_infod
 t/00-load.t
 t/01-constructor.t
 t/02-info-retrieving.t

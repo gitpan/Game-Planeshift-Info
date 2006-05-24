@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+
+use Game::Planeshift::Info ;
+use Proc::Daemon;
+
+my $players = ['Baston', 'Ehasara', 'Narita', 'Setill', 'Soshise', 'Mardun', 'Caules', 'Javeroal','Bodacher','Proglin','Eus','Sangwa','Anfa','Essiri','Isra','Vaice','Flameron'];
+
+my $ps = Game::Planeshift::Info->new(
+	players => $players
+) ;
+
+# my $ps = Game::Planeshift::Info->new() ;
+Proc::Daemon::Init;
+while(1)
+{
+	my $d = $ps->retrieve_info or die "unable to retrieve Planeshift informations\n";
+
+	my $str = "Total players online : $d->{server_status}->{Total_Online}\nCurrent online buddies are :\n";
+	foreach (@{$players})
+	{
+		print "testing player : $_ => ",$ps->is_online($_),"\n";
+		$str .= "$_\n" if($ps->is_online($_));
+	}
+
+	system("/opt/kde/bin/dcop knotify Notify notify sg_success_event planeshift \"$str\" '' '' 16 0");
+	sleep 600;
+}

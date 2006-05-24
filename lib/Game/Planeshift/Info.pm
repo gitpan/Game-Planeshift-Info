@@ -15,7 +15,7 @@ Version 0.4
 
 =cut
 
-our $VERSION = '0.4';
+our $VERSION = '0.5';
 
 =head1 SYNOPSIS
 
@@ -205,6 +205,7 @@ sub _parse_content
 		next if($raw_data[$k]=~/^\s*$/) ;
 		if($raw_data[$k]=~/\s*<H2>Stats<\/H2>/)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Stats loop.\n";
 			my $tmp;
 			while(1)
 			{
@@ -266,6 +267,7 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<p class="yellowtitlebig">Players Online<\/p>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Players Online loop.\n";
 			my $html;
 			my $start_found;
 			while(1)
@@ -305,10 +307,12 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<p class="yellowtitlebig">Most Active Players<\/p>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Most Active Players loop.\n";
 			my $html;
 			my $start_found;
 			while(1)
 			{
+				last unless(defined($raw_data[$k]));
 				if(!defined($start_found) && $raw_data[$k]!~/\s*<TABLE CELLPADDING=5>/i)
 				{
 					$k++;
@@ -341,6 +345,7 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<p class="yellowtitlebig">Best Player Averages<\/p>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Best Player Averages loop.\n";
 			my $html;
 			my $start_found;
 			while(1)
@@ -377,6 +382,7 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<P class="yellowtitlehelp">Best Advisors<\/P>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Best Advisors loop.\n";
 # 			print "Entering in Best Advisors\n";
 			my $html;
 			my $start_found;
@@ -413,6 +419,7 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<P class="yellowtitleaxe">Dueling Champs<\/P>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Dueling Champs loop.\n";
 # 			print "Entering in Dueling Champs\n";
 			my $html;
 			my $start_found;
@@ -449,6 +456,7 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<P class="yellowtitlebig">Strength of the Gods<\/P>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Strength of the Gods loop.\n";
 			my $html;
 			my $start_found;
 			while(1)
@@ -484,6 +492,7 @@ sub _parse_content
 		}
 		elsif($raw_data[$k]=~/<P class="yellowtitlebig">Thinkers of the World<\/P>/i)
 		{
+			print "[Game::Planeshift::Info::_parse_content() DEBUG] entering Strength of the Gods loop.\n";
 			my $html;
 			my $start_found;
 			while(1)

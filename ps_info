@@ -1,0 +1,61 @@
+#!/usr/bin/perl
+
+## Example script for using Game::Planeshift::Info
+## This code is under GNU/GPLv2 License
+## Copyleft: Arnaud DUPUIS <a.dupuis@infinityperl.org>
+## 
+## I have not yet found any interest in this module... It make me spend most of my time.
+##
+## Planeshift rocks ! Download at : http://www.planeshift.it/main_01.html
+## Thanks to all players who make me wants if they are online to connect myself... The first meaning of this script...
+## special greets to Anfa my sweetheart in game ;-), Setill the Evil and Proglin the entertainer !
+
+use lib 'lib/';
+use Game::Planeshift::Info ;
+
+my %rc = (
+	'dcop_bin' => "dcop"
+);
+$rc{'players'} = ['Anfa','Baston'];
+
+if( -e "$ENV{'HOME'}/.ps_info.rc")
+{
+	open(FH, "<$ENV{'HOME'}/.ps_info.rc") or die $! ;
+	while(<FH>)
+	{
+		chomp ;
+		my ($k,$v) = split(/\s*=\s*/,$_);
+		if($k eq 'players')
+		{	
+			$rc{$k} = [split(/\s*,\s*/,$v)] ;
+		}
+		else
+		{
+			$rc{$k}=$v;
+		}
+	}
+	
+}
+
+
+my $ps = Game::Planeshift::Info->new(
+	players => $rc{'players'}
+) ;
+
+
+my $d = $ps->retrieve_info or die "unable to retrieve Planeshift informations\n";
+
+my $str = "Total players online : $d->{server_status}->{Total_Online}\nCurrent online buddies are :\n";
+my $chk;
+foreach (@{$rc{'players'}})
+{
+	print "testing player : $_ => ",$ps->is_online($_),"\n";
+	if($ps->is_online($_))
+	{
+		$str .= "- $_\n" ;
+		$chk++;
+	}
+	
+}
+$str .= "None of your buddies are online... Go to work !\n" unless($chk);
+system("$rc{dcop_bin} knotify Notify notify ps_info_event planeshift \"$str\" '' '' 16 0");
